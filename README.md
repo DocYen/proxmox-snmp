@@ -13,6 +13,7 @@
 `nano /opt/snmp-lvm-used.sh` for LVM<br/>
 `nano /opt/snmp-zfs-used.sh` for ZFS<br/>
 `nano /opt/snmp-ceph-used.sh` for Ceph<br/>
+`nano /opt/snmp-ceph-health.sh` for Ceph Health Status<br/>
 `chmod +x /opt/snmp-*`
 
 ### Run snmpd as root, because debian added the user "Debian-snmp" to the snmp.service but for SMART/LVM Status we need to be root.
@@ -54,5 +55,13 @@ ExecStart=/usr/sbin/snmpd -Lsd -Lf /dev/null -u root -g Debian-snmp -I -smux,mte
 * OID = .1.3.6.1.2.1.25.1.10
 * Response Must Include (Down Status) = PASSED
 * Response Must Include (Warning Status) = PASSED
+
+#### Ceph Health status
+* Add sensor
+* SNMP Custom String
+* Name = SMART status
+* OID = .1.3.6.1.2.1.25.1.13
+* Response Must Include (Down Status) = HEALTH_OK
+* Response Must Include (Warning Status) = HEALTH_WARN
 
 ![PRTG](https://i.postimg.cc/DZNMD74V/PRTG.png)
